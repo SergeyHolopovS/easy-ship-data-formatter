@@ -33,16 +33,18 @@ export default function Home() {
       });
       let currHeader = "";
       data.arrays.split("\n").map(el => {
-        if(el.endsWith(":")) {
-          currHeader = el.substring(0, el.length-1);
+        if(el.trim().endsWith(":")) {
+          currHeader = el.trim().substring(0, el.length-1);
           result.arrays[currHeader] = [];
           return;
         }
+        if(result.arrays[currHeader] === undefined) result.arrays[currHeader] = [];
         result.arrays[currHeader].push(el);
       });
       navigator.clipboard.writeText(JSON.stringify(result, undefined, 4));
       toast.success("Результат скопирован в буфер обмена!");
-    } catch {
+    } catch(e) {
+      console.error(e);
       toast.error("Вы нарушили правила ввода!");
     }
   }
