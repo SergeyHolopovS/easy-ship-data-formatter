@@ -34,7 +34,7 @@ export default function Home() {
       let currHeader = "";
       data.arrays.split("\n").map(el => {
         if(el.trim().endsWith(":")) {
-          currHeader = el.trim().substring(0, el.length-1);
+          currHeader = el.split(":")[0];
           result.arrays[currHeader] = [];
           return;
         }
